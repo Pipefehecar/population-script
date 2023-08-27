@@ -13,11 +13,12 @@ def extract_population(country: str, csv_path: str) -> tuple:
         tuple: A tuple containing the header (years) and the population density data for the specified country.
     """
 
-    with open(csv_path, 'r') as csv_file:
+    with open(csv_path, "r", encoding="utf-8") as csv_file:
         csv_data = csv.reader(csv_file)
-        header = [i.split(' ')[0] for i in next(csv_data)][5:13]
-        print(header)
+        header = [i.split(" ")[0] for i in next(csv_data)][5:13]
+
         for row in csv_data:
             if row[2] == country.title():
                 density_data = row[5:13]
                 return (header, density_data)
+        raise ValueError("Country not found")
