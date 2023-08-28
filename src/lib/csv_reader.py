@@ -19,6 +19,6 @@ def extract_population(country: str, csv_path: str) -> tuple:
 
         for row in csv_data:
             if row[2] == country.title():
-                density_data = row[5:13]
+                density_data = list(map(int, row[5:13]))
                 return (header, density_data)
         raise ValueError("Country not found")
